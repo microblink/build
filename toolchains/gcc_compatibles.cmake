@@ -61,6 +61,9 @@ if ( CMAKE_VERSION VERSION_GREATER 3.7 )
             unset( CMAKE_CXX_STANDARD )
         endif()
     endif()
+    if ( CMAKE_VERSION VERSION_GREATER 3.19 )
+        set( CMAKE_CXX_STANDARD 23 )
+    endif()
 endif()
 
 # https://cmake.org/cmake/help/v3.3/policy/CMP0063.html
