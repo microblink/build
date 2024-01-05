@@ -74,10 +74,16 @@ list( APPEND TNUN_compiler_disable_LTO -fno-whole-program-vtables )
 
 set( TNUN_address_sanitizer             -fsanitize=address   )
 set( TNUN_undefined_behaviour_sanitizer -fsanitize=undefined )
-set( TNUN_integer_sanitizer             -fsanitize=integer   )
 set( TNUN_thread_sanitizer              -fsanitize=thread    )
 set( TNUN_memory_sanitizer              -fsanitize=memory    )
 set( TNUN_cfi_sanitizer                 -fsanitize=cfi       )
+
+# -fsanitize=integer also enables checks that are "suspicious", but not undefined.
+# Unfortunately, lots of libraries depend on that behaviour (unsigned overflow and similar), so enabling these produces
+# a lot of false signals.
+# https://clang.llvm.org/docs/UndefinedBehaviorSanitizer.html#available-checks
+# Enable only sanitizers that check for truly undefined integer behavior.
+set( TNUN_integer_sanitizer -fsanitize=signed-integer-overflow -fsanitize=integer-divide-by-zero )
 
 set( TNUN_compiler_runtime_sanity_checks ${TNUN_address_sanitizer} ${TNUN_undefined_behaviour_sanitizer} ${TNUN_integer_sanitizer} )
 set( TNUN_linker_runtime_sanity_checks ${TNUN_compiler_runtime_sanity_checks} )
