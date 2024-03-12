@@ -19,8 +19,8 @@ endif()
 set( TNUN_compiler_debug_symbols ${TNUN_debug_symbols} )
 set( TNUN_linker_debug_symbols   ${TNUN_debug_symbols} "SHELL:-s DEMANGLE_SUPPORT=1" )
 
-set( TNUN_linker_exceptions_on  "SHELL:-s DISABLE_EXCEPTION_CATCHING=0" )
-set( TNUN_linker_exceptions_off "SHELL:-s DISABLE_EXCEPTION_CATCHING=1" )
+set( TNUN_linker_exceptions_on  "-fwasm-exceptions" )
+set( TNUN_linker_exceptions_off "-fno-exceptions" )
 
 list( APPEND TNUN_compiler_exceptions_on  ${TNUN_linker_exceptions_on}  )
 list( APPEND TNUN_compiler_exceptions_off ${TNUN_linker_exceptions_off} )
