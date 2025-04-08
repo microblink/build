@@ -19,7 +19,7 @@ endif()
 set( TNUN_compiler_debug_symbols ${TNUN_debug_symbols} )
 set( TNUN_linker_debug_symbols   ${TNUN_debug_symbols} )
 
-if ( NOT EMSCRIPTEN_VERSION VERSION_GREATER_EQUAL "4.0.6" )
+if ( EMSCRIPTEN_VERSION VERSION_LESS "4.0.6" )
     set( TNUN_linker_debug_symbols "SHELL:-s DEMANGLE_SUPPORT=1" )
 endif()
 
