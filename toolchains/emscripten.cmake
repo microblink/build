@@ -17,7 +17,11 @@ else()
 endif()
 
 set( TNUN_compiler_debug_symbols ${TNUN_debug_symbols} )
-set( TNUN_linker_debug_symbols   ${TNUN_debug_symbols} "SHELL:-s DEMANGLE_SUPPORT=1" )
+set( TNUN_linker_debug_symbols   ${TNUN_debug_symbols} )
+
+if ( NOT EMSCRIPTEN_VERSION VERSION_GREATER_EQUAL "4.0.6" )
+    set( TNUN_linker_debug_symbols "SHELL:-s DEMANGLE_SUPPORT=1" )
+endif()
 
 set( TNUN_linker_exceptions_on  "SHELL:-s DISABLE_EXCEPTION_CATCHING=0" )
 set( TNUN_linker_exceptions_off "SHELL:-s DISABLE_EXCEPTION_CATCHING=1" )
